@@ -23,7 +23,19 @@ pip install ezdxf
 
 ## Quick Start
 
-BoxForge is a library — you drive it from a Python script. All user-configurable values live together at the bottom of your script (per project convention). Here is a minimal example:
+### GUI (recommended)
+
+```bash
+python gui.py
+```
+
+A desktop window opens with all parameters grouped into labeled sections. Fill in your box dimensions, material, CNC, and CAM settings, choose an output folder, and click **Generate DXF**, **Generate G-code**, or **Generate Both**. Status and error messages appear in the panel at the bottom.
+
+To change your personal defaults (so the form pre-fills with your usual settings), edit the `# USER DEFAULTS` block at the bottom of `gui.py` — all values are grouped together there.
+
+### Script (advanced)
+
+BoxForge is also a library you can drive directly from a Python script. All user-configurable values live together at the bottom of the script. Here is a minimal example:
 
 ```python
 from boxforge.config import BoxSpec, MaterialSpec, CncSpec, JoinerySpec, CamSpec
@@ -81,6 +93,7 @@ CAM = CamSpec(
 
 ```
 boxforge/
+├── gui.py               # desktop GUI (run this to get started)
 ├── __init__.py          # package version
 ├── config.py            # BoxSpec, MaterialSpec, CncSpec, JoinerySpec, CamSpec
 ├── box.py               # panel geometry assembly (build_box)
