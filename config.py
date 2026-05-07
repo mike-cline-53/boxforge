@@ -126,8 +126,9 @@ class CamSpec:
       N passes of at most this depth. A smaller pass depth is gentler on
       the bit but slower.
     - safe_z: rapid-move clearance above the material.
-    - feed_rapid/feed_plunge/feed_cut: feed rates in mm/min for G00
-      rapids, Z plunges, and XY cutting respectively.
+    - feed_rapid/feed_plunge/feed_cut: feed rates in mm/sec for G00
+      rapids, Z plunges, and XY cutting respectively. These are
+      converted to mm/min automatically when G-code is emitted.
     - plunge_ramp_length: horizontal distance over which the tool ramps
       from safe_z to the current pass depth when starting a part.
     - preamble: raw gcode block inserted after G21/G90/G94 (before the
@@ -152,9 +153,9 @@ class CamSpec:
     total_depth: float
     pass_depth: float = 5.0
     safe_z: float = 5.0
-    feed_rapid: float = 2400.0
-    feed_plunge: float = 600.0
-    feed_cut: float = 1200.0
+    feed_rapid: float = 40.0
+    feed_plunge: float = 10.0
+    feed_cut: float = 20.0
     plunge_ramp_length: float = 20.0
     preamble: str = _DEFAULT_PREAMBLE
     postamble: str = _DEFAULT_POSTAMBLE

@@ -533,7 +533,7 @@ def _emit_pass(
     merged: list[float] = sorted(set(breakpoints) | set(s_arc))
     merged = [s for s in merged if -1e-6 <= s <= total_s + 1e-6]
 
-    feed_cut = cam.feed_cut
+    feed_cut = cam.feed_cut * 60.0
     prev_xy: Point = pts[0]
     prev_z = z_prev
     for s in merged:
@@ -609,15 +609,15 @@ def emit_gcode(
     for part_i, path in enumerate(ordered, start=1):
         lines.append(f"(No. {part_i}: {path.name})")
         start = path.pts[0]
-        lines.append(f"G00 {_fmt_xy(start)} Z{cam.safe_z:.4f} F{cam.feed_rapid:.0f}")
-        lines.append(f"G01 Z0.0000 F{cam.feed_plunge:.0f}")
+        lines.append(f"G00 {_fmt_xy(start)} Z{cam.safe_z:.4f} F{cam.feed_rapid * 60.0:.0f}")
+        lines.append(f"G01 Z0.0000 F{cam.feed_plunge * 60.0:.0f}")
         prev_z = 0.0
         for pass_i, depth in enumerate(depths):
             z_now = -depth
             is_final = (pass_i == len(depths) - 1)
             _emit_pass(lines, path, prev_z, z_now, cam, is_final)
             prev_z = z_now
-        lines.append(f"G00 Z{cam.safe_z:.4f} F{cam.feed_rapid:.0f}")
+        lines.append(f"G00 Z{cam.safe_z:.4f} F{cam.feed_rapid * 60.0:.0f}")
         lines.append("")
 
     # ---- footer ----

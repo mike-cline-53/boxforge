@@ -68,9 +68,9 @@ CAM = CamSpec(
     total_depth=18.25,  # material + slight overcut into spoilboard
     pass_depth=6.0,
     safe_z=5.0,
-    feed_rapid=2400.0,
-    feed_plunge=600.0,
-    feed_cut=1200.0,
+    feed_rapid=40.0,    # mm/sec (converted to mm/min in G-code)
+    feed_plunge=10.0,   # mm/sec
+    feed_cut=20.0,      # mm/sec
     use_tabs=True,
     tab_height=3.0,
     tab_ramp_length=10.0,
@@ -136,9 +136,9 @@ All dimensions are in **millimeters**.
 | `total_depth` | — | Full cut depth (material + overcut) |
 | `pass_depth` | 5.0 | Max depth per pass |
 | `safe_z` | 5.0 | Rapid clearance height |
-| `feed_rapid` | 2400 | Rapid move feed rate (mm/min) |
-| `feed_plunge` | 600 | Plunge feed rate |
-| `feed_cut` | 1200 | Cutting feed rate |
+| `feed_rapid` | 40.0 | Rapid move feed rate (mm/sec; converted to mm/min in G-code) |
+| `feed_plunge` | 10.0 | Plunge feed rate (mm/sec) |
+| `feed_cut` | 20.0 | Cutting feed rate (mm/sec) |
 | `plunge_ramp_length` | 20.0 | Horizontal ramp distance on entry |
 | `use_tabs` | False | Enable holding tabs |
 | `tab_height` | 3.0 | Material left under each tab |
